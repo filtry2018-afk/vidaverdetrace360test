@@ -1,11 +1,5 @@
-# Vida Verde Waste Intelligence
+# Vida Verde Trace360 Test
 
-Progressive Web App (PWA) oficial da Vida Verde BioTech LTDA para registro e inteligência de fluxos de resíduos.
+Clean rebuild of the Vida Verde BioTech LTDA pilot PWA.
 
-- Interface: Português / English
-- Instalação via navegador em Android e iPhone
-- Contato: contact@vidaverdebiotech.com.br
-- WhatsApp: +55 51 99926-1234
-- Website: https://www.vidaverdebiotech.com.br
-
-Aplicação em desenvolvimento / versão piloto.
+This test version stores accounts and waste-stream data locally in the browser (localStorage). It is not a production backend.
