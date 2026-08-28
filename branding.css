@@ -1,0 +1,4 @@
+.hero .brandmark{width:240px;height:100px;border-radius:18px;background:#fff url('icons/logo-official.jpg') center/90% auto no-repeat;box-shadow:0 14px 30px rgba(0,0,0,.2)}
+.hero .brandmark img{display:none}
+.hero .brand>div:last-child{display:none}
+@media(max-width:600px){.hero .brandmark{width:210px;height:86px}}
