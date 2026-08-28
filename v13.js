@@ -20,7 +20,7 @@
   }
 
   window.logo=logo=function(){
-    return '<img class="vv-logo-full" src="./icons/logo-full.png?v=13" alt="Vida Verde BioTech LTDA">';
+    return '<img class="vv-logo-full" src="./icons/logo-official.jpg?v=16" alt="Vida Verde BioTech LTDA">';
   };
 
   window.showLogin=showLogin=function(){
