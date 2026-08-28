@@ -1,0 +1,15 @@
+{
+  "id":"./",
+  "name":"Vida Verde Waste Intelligence",
+  "short_name":"Vida Verde",
+  "description":"Plataforma Vida Verde BioTech para registro e inteligência de fluxos de resíduos.",
+  "lang":"pt-BR",
+  "start_url":"./?source=pwa",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f3f7f5",
+  "theme_color":"#173f35",
+  "orientation":"any",
+  "categories":["business","productivity"],
+  "icons":[{"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
