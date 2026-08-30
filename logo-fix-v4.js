@@ -1,5 +1,5 @@
 window.logo = function(){
-  return '<img src="assets/logo-original-v4.png?v=4" alt="Vida Verde BioTech LTDA">';
+  return '<img src="assets/logo-final-v5.jpg?v=5" alt="Vida Verde BioTech LTDA">';
 };
 try {
   if (typeof current === 'function' && current()) dashboard();
