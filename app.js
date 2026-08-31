@@ -6,7 +6,7 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const read=(k,d=[])=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
 const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-let lang=localStorage.getItem(K.lang)||'pt', mode='login', deferredPrompt=null;
+let lang=localStorage.getItem(K.lang)||'pt', mode='login', deferredPrompt=window.__pwaPrompt||null;
 const T={
 pt:{headline:'Inteligência de resíduos para uma economia circular real',sub:'Registre, qualifique e localize fluxos de resíduos com dados técnicos, prioridade e rastreabilidade.',login:'Entrar',register:'Registrar',name:'Nome / empresa',email:'E-mail',password:'Senha',installTitle:'Instalar no telefone',installText:'Acesso rápido em tela cheia, direto pelo ícone Vida Verde.',install:'Instalar aplicativo',bad:'E-mail ou senha incorretos.',exists:'Este e-mail já está registrado.',created:'Conta registrada. Agora você pode entrar.',dashboard:'Registro de resíduos',logout:'Sair',add:'Registrar resíduo',search:'Buscar por tipo, localização ou especificação',type:'Tipo de resíduo',qty:'Quantidade',unit:'Unidade',moisture:'Umidade',season:'Sazonalidade',location:'Localização',spec:'Especificação',problem:'Problema',expect:'Expectativas',notes:'Observações especiais',urgent:'Urgente',status:'Status',save:'Salvar',cancel:'Cancelar',all:'Todos',noRecords:'Nenhum registro encontrado.',installReady:'Instalação disponível.',installed:'Aplicativo instalado.',installHow:'Como instalar',installAndroid:'No Chrome, abra o menu ⋮ e escolha “Instalar aplicativo” ou “Adicionar à tela inicial”.',installIos:'No Safari, toque em Compartilhar e depois em “Adicionar à Tela de Início”.'},
 en:{headline:'Waste intelligence for a real circular economy',sub:'Register, qualify and locate waste streams with technical data, priority and traceability.',login:'Login',register:'Register',name:'Name / company',email:'Email',password:'Password',installTitle:'Install on phone',installText:'Fast full-screen access from the Vida Verde icon.',install:'Install application',bad:'Incorrect email or password.',exists:'This email is already registered.',created:'Account registered. You can now log in.',dashboard:'Waste registry',logout:'Logout',add:'Register waste',search:'Search by type, location or specification',type:'Waste type',qty:'Quantity',unit:'Unit',moisture:'Moisture',season:'Seasonality',location:'Location',spec:'Specification',problem:'Problem',expect:'Expectations',notes:'Special notes',urgent:'Urgent',status:'Status',save:'Save',cancel:'Cancel',all:'All',noRecords:'No records found.',installReady:'Installation available.',installed:'Application installed.',installHow:'How to install',installAndroid:'In Chrome, open the ⋮ menu and choose “Install app” or “Add to Home screen”.',installIos:'In Safari, tap Share and then “Add to Home Screen”.'}};
@@ -23,13 +23,15 @@ function bindAuth(){
   $('pt').onclick=()=>{lang='pt';localStorage.setItem(K.lang,lang);paintAuth()};$('en').onclick=()=>{lang='en';localStorage.setItem(K.lang,lang);paintAuth()};$('loginTab').onclick=()=>{mode='login';$('msg').textContent='';paintAuth()};$('registerTab').onclick=()=>{mode='register';$('msg').textContent='';paintAuth()};
   $('authForm').onsubmit=e=>{e.preventDefault();const email=$('email').value.trim().toLowerCase(),password=$('password').value,name=$('name').value.trim();const users=read(K.users);$('msg').className='';if(mode==='register'){if(users.some(u=>u.email===email))return msg(tr('exists'),'error');users.push({id:crypto.randomUUID?crypto.randomUUID():Date.now().toString(),name:name||email,email,password,role:'entity'});write(K.users,users);mode='login';paintAuth();return msg(tr('created'),'ok')}const user=users.find(u=>u.email===email&&u.password===password);if(!user)return msg(tr('bad'),'error');localStorage.setItem(K.session,user.id);renderDashboard(user)};
   $('installBtn').onclick=installApp;paintAuth();
+  if(deferredPrompt&&$('installStatus'))$('installStatus').textContent=tr('installReady');
 }
 function msg(text,type){$('msg').className='msg '+type;$('msg').textContent=text}
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;if($('installStatus'))$('installStatus').textContent=tr('installReady')});
-window.addEventListener('appinstalled',()=>{deferredPrompt=null;if($('installStatus'))$('installStatus').textContent=tr('installed')});
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.__pwaPrompt=e;deferredPrompt=e;if($('installStatus'))$('installStatus').textContent=tr('installReady')});
+window.addEventListener('appinstalled',()=>{window.__pwaPrompt=null;deferredPrompt=null;if($('installStatus'))$('installStatus').textContent=tr('installed')});
 async function installApp(){
   if(window.matchMedia('(display-mode: standalone)').matches||navigator.standalone){return showModal(tr('installTitle'),tr('installed'))}
-  if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;return}
+  const prompt=deferredPrompt||window.__pwaPrompt;
+  if(prompt){prompt.prompt();await prompt.userChoice;window.__pwaPrompt=null;deferredPrompt=null;return}
   const isiOS=/iPad|iPhone|iPod/.test(navigator.userAgent);showModal(tr('installHow'),isiOS?tr('installIos'):tr('installAndroid'));
 }
 function currentUser(){const id=localStorage.getItem(K.session);return read(K.users).find(u=>u.id===id)}
