@@ -1,18 +1,18 @@
 {
-  "id":"./",
+  "id":"./?source=pwa-v104",
   "name":"Vida Verde Trace360 Waste Intelligence",
   "short_name":"Trace360",
   "description":"Registro e inteligência de resíduos da Vida Verde BioTech LTDA.",
-  "start_url":"./",
+  "start_url":"./?source=pwa-v104",
   "scope":"./",
   "display":"standalone",
-  "display_override":["standalone","minimal-ui"],
+  "display_override":["standalone"],
   "background_color":"#eef5f1",
   "theme_color":"#164c3d",
   "orientation":"any",
   "prefer_related_applications":false,
   "icons":[
-    {"src":"assets/icon-user-192.jpg?v=106","sizes":"192x192","type":"image/jpeg","purpose":"any"},
-    {"src":"assets/icon-user-512.jpg?v=106","sizes":"512x512","type":"image/jpeg","purpose":"any"}
+    {"src":"assets/icon-192.png?v=104","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"assets/icon-512.png?v=104","sizes":"512x512","type":"image/png","purpose":"any"}
   ]
 }
