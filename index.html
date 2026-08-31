@@ -9,9 +9,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Trace360">
 <title>Vida Verde Trace360 Test</title>
-<link rel="manifest" href="manifest.webmanifest?v=105">
-<link rel="icon" href="assets/icon-user-192.jpg?v=105" sizes="192x192" type="image/jpeg">
-<link rel="apple-touch-icon" href="assets/icon-user-192.jpg?v=105">
+<link rel="manifest" href="manifest.webmanifest?v=106">
+<link rel="icon" href="assets/icon-user-192.jpg?v=106" sizes="192x192" type="image/jpeg">
+<link rel="apple-touch-icon" href="assets/icon-user-192.jpg?v=106">
 <link rel="stylesheet" href="styles.css?v=102">
 </head>
 <body>
@@ -38,9 +38,9 @@
           <div id="msg" aria-live="polite"></div>
         </form>
         <div class="install-card">
-          <div class="install-head"><img class="install-icon" src="assets/icon-user-192.jpg?v=105" alt=""><div><b id="installTitle">Instalar no telefone</b><span id="installText">Acesso rápido em tela cheia, direto pelo ícone Vida Verde.</span></div></div>
+          <div class="install-head"><img class="install-icon" src="assets/icon-user-192.jpg?v=106" alt=""><div><b id="installTitle">Instalar no telefone</b><span id="installText">Acesso rápido em tela cheia, direto pelo ícone Vida Verde.</span></div></div>
           <button id="installBtn" type="button">Instalar aplicativo</button>
-          <small id="installStatus"></small>
+          <small id="installStatus">Preparando instalação...</small>
         </div>
         <div class="support">contact@vidaverdebiotech.com.br · WhatsApp +55 51 99926-1234 · www.vidaverdebiotech.com.br</div>
       </div>
@@ -49,9 +49,9 @@
 </div>
 <div id="modal" class="modal hidden" aria-hidden="true"><div class="modal-card"><h3 id="modalTitle"></h3><p id="modalText"></p><button id="modalClose" type="button">OK</button></div></div>
 <script src="logo-loader.js?v=102"></script>
-<script src="app.js?v=102"></script>
+<script src="app.js?v=106"></script>
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{await navigator.serviceWorker.register('./sw.js?v=105',{scope:'./'});}catch(e){console.error('SW',e);}});}
+if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{const reg=await navigator.serviceWorker.register('./sw.js?v=106',{scope:'./'});await navigator.serviceWorker.ready;window.dispatchEvent(new Event('pwa-ready'));}catch(e){console.error('SW',e);window.dispatchEvent(new Event('pwa-error'));}});}
 </script>
 </body>
 </html>
