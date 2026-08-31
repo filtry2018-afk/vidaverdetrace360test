@@ -9,10 +9,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Trace360">
 <title>Vida Verde Trace360 Test</title>
-<link rel="manifest" href="manifest.webmanifest?v=109">
+<link rel="manifest" href="manifest.webmanifest?v=110">
 <link rel="icon" href="assets/trace360-user-icon-final-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="assets/trace360-user-icon-final-192.png">
 <link rel="stylesheet" href="styles.css?v=103">
+<script>
+window.__pwaPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__pwaPrompt=e;});
+</script>
 </head>
 <body>
 <div id="appRoot">
@@ -51,7 +55,7 @@
 <script src="logo-loader.js?v=103"></script>
 <script src="app.js?v=103"></script>
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{await navigator.serviceWorker.register('./sw.js?v=103',{scope:'./'});}catch(e){console.error('SW',e);}});}
+if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{await navigator.serviceWorker.register('./sw.js?v=110',{scope:'./'});await navigator.serviceWorker.ready;}catch(e){console.error('SW',e);}});}
 </script>
 </body>
 </html>
